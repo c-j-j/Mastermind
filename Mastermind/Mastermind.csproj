@@ -43,6 +43,12 @@
     <Compile Include="Guess.cs" />
     <Compile Include="Possibilities.cs" />
     <Compile Include="HitCountCalculator.cs" />
+    <Compile Include="CodeMaker.cs" />
+    <Compile Include="Score.cs" />
+    <Compile Include="ScoreCalculator.cs" />
+    <Compile Include="Permutation.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="ComputerCodeMaker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

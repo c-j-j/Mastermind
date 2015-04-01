@@ -8,6 +8,12 @@ namespace Mastermind
     {
         HitCountCalculator hitCountCalculator;
 
+        public string GetNextGuess(Possibilities possibilities)
+        {
+            var negamaxCalculator = new Negamax.NegamaxCalculator<GuessWithPossiblities>(IsGuessPresent, GetHitCount, GetPossibilities);
+            return negamaxCalculator.Negamax(GuessWithPossiblities.NoGuess(possibilities)).Node.Guess;
+        }
+
         public CodeGuesser(HitCountCalculator HitCountCalculator)
         {
             this.hitCountCalculator = HitCountCalculator;
@@ -28,12 +34,5 @@ namespace Mastermind
             var possibilities = guess.Possibilities;
             return possibilities.GetPossibilities().Select(g => new GuessWithPossiblities(possibilities, g));
         }
-
-        public string GetNextGuess(Possibilities possibilities)
-        {
-            var negamaxCalculator = new Negamax.NegamaxCalculator<GuessWithPossiblities>(IsGuessPresent, GetHitCount, GetPossibilities);
-            return negamaxCalculator.Negamax(GuessWithPossiblities.NoGuess(possibilities)).Node.Guess;
-        }
-
     }
 }
