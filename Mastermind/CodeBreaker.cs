@@ -19,14 +19,20 @@ namespace Mastermind
                 var guess = GetNextGuess(possibilities);
                 var score = PlayGuess(codeMaker, guess);
 
+                Console.WriteLine("Guess = " + guess);
+                Console.WriteLine("Score = " + score);
+
                 if (GuessIsCorrect(score))
                 {
+                    Console.WriteLine("Computer has guessed the code.");
                     return guess;
                 }
 
                 EliminatePossibilities(possibilities, guess, score);
+                Console.WriteLine("Possibilities left = " + possibilities.Count());
             }
 
+            Console.WriteLine("Computer has failed to guess the code.");
             return "NOT FOUND";
         }
 
