@@ -5,7 +5,7 @@ namespace Mastermind
         public static void Main()
         {
             new Game(new ComputerCodeMaker(new ScoreCalculator()),
-                    new CodeBreaker(new CodeGuesser(new HitCountCalculator()))).Run();
+                    new ComputerCodeBreaker(new NegamaxCodeGuesser(new HitCountCalculator()))).Run();
         }
     }
 }

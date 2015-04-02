@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Mastermind
 {
-    public class CodeGuesser : ICodeGuesser
+    public class NegamaxCodeGuesser : ICodeGuesser
     {
         HitCountCalculator hitCountCalculator;
 
-        public CodeGuesser(HitCountCalculator HitCountCalculator)
+        public NegamaxCodeGuesser(HitCountCalculator HitCountCalculator)
         {
             this.hitCountCalculator = HitCountCalculator;
 

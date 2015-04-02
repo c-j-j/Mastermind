@@ -46,7 +46,7 @@
     <Compile Include="PossibilitiesTest.cs" />
     <Compile Include="ScoreTest.cs" />
     <Compile Include="ScoreCalculatorTest.cs" />
-    <Compile Include="CombinationTest.cs" />
+    <Compile Include="PermutationTest.cs" />
     <Compile Include="CodeBreakerTest.cs" />
     <Compile Include="StubCodeGuesser.cs" />
     <Compile Include="StubCodeMaker.cs" />

@@ -4,40 +4,34 @@ using System.Linq;
 
 public class Permutation
 {
-
     public static IEnumerable<string> Generate(int length, params string[] options)
     {
         var permutations = new List<string>();
 
         if (length == 1)
         {
-            for (int i = 0; i < options.Length; i++)
-            {
-                permutations.Add(CreatePermutation(length, options[i]));
-            }
-        }
-        else
-        {
-            for (int i = 0; i < options.Length; i++)
-            {
-                foreach (string item in Generate(length - 1, options))
-                {
-                    permutations.Add(options[i] + item);
-                }
-            }
+            return SingleStringPermutations(options);
         }
 
+        for (int i = 0; i < options.Length; i++)
+        {
+            foreach (string subPermutation in Generate(length - 1, options))
+            {
+                permutations.Add(options[i] + subPermutation);
+            }
+        }
 
         return permutations;
     }
 
-    static string CreatePermutation(int length, string element)
+    static IEnumerable<string> SingleStringPermutations(string[] options)
     {
-        string permutation = "";
-        for (int i = 0; i < length; i++)
+        var permutations = new List<string>();
+
+        for (int i = 0; i < options.Length; i++)
         {
-            permutation += element;
+            permutations.Add(options[i]);
         }
-        return permutation;
+        return permutations;
     }
 }

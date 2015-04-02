@@ -8,10 +8,6 @@ namespace Mastermind.Test
             SelectedCode = code;
         }
 
-        public void SetCode(Possibilities possibilities)
-        {
-        }
-
         public Score GetScore(string guess)
         {
             return new ScoreCalculator().GetScore(SelectedCode, guess);

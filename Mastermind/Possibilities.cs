@@ -30,20 +30,32 @@ namespace Mastermind
 
         public void EliminatePossibilities(string guess, Score score)
         {
-            var possibilitiesToRemove = new HashSet<string>();
+            var possibilitiesToEliminate = new HashSet<string>();
 
             foreach (var possibility in possibilities)
             {
-                var scoreForPossibility = new ScoreCalculator().GetScore(guess, possibility);
-                Console.WriteLine(string.Format("score = {0}, possibility = {1}", scoreForPossibility, possibility));
-
-                if (!score.EqualTo(scoreForPossibility))
+                if (CanPossibilityBeEliminated(score, GetScore(guess, possibility)))
                 {
-                    possibilitiesToRemove.Add(possibility);
+                    possibilitiesToEliminate.Add(possibility);
                 }
             }
 
-            possibilities.RemoveWhere(possibilitiesToRemove.Contains);
+            RemovePossibilities(possibilitiesToEliminate);
+        }
+
+        bool CanPossibilityBeEliminated(Score scoreOfGuess, Score scoreOfPossibilityWRTGuess)
+        {
+            return !scoreOfGuess.EqualTo(scoreOfPossibilityWRTGuess);
+        }
+
+        void RemovePossibilities(HashSet<string> possibilitiesToEliminate)
+        {
+            possibilities.RemoveWhere(possibilitiesToEliminate.Contains);
+        }
+
+        Score GetScore(string guess, string possibility)
+        {
+            return new ScoreCalculator().GetScore(guess, possibility);
         }
 
     }

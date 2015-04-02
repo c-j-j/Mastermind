@@ -5,7 +5,7 @@ namespace Mastermind
 {
     public class ComputerCodeMaker : CodeMaker
     {
-        ScoreCalculator scoreCalculator;
+        readonly ScoreCalculator scoreCalculator;
 
         public ComputerCodeMaker(string selectedCode, ScoreCalculator scoreCalculator)
         {
@@ -16,12 +16,6 @@ namespace Mastermind
         public ComputerCodeMaker(ScoreCalculator scoreCalculator)
         {
             this.scoreCalculator = scoreCalculator;
-        }
-
-        public void SetCode(Mastermind.Possibilities possibilities)
-        {
-            //int randomIndex = new Random().Next(possibilities.Count());
-            //SelectedCode = possibilities.GetPossibilities().ElementAt(randomIndex);
         }
 
         public Score GetScore(string guess)

@@ -2,7 +2,6 @@ namespace Mastermind.Test
 {
     public class StubCodeGuesser : ICodeGuesser
     {
-
         readonly string guess;
 
         public StubCodeGuesser(string guess)

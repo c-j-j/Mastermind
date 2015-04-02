@@ -7,14 +7,14 @@ namespace Mastermind.Tests
     [TestFixture]
     public class CodeGuesserTest
     {
-        CodeGuesser codeGuesser;
+        NegamaxCodeGuesser codeGuesser;
         Possibilities possibilities;
         HitCountCalculator hitCountCalculator;
 
         [SetUp]
         public void Setup(){
             hitCountCalculator = new HitCountCalculator();
-            codeGuesser = new CodeGuesser(hitCountCalculator);
+            codeGuesser = new NegamaxCodeGuesser(hitCountCalculator);
             possibilities = new Possibilities("1234");
         }
 

@@ -1,16 +1,13 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using Negamax;
 
 namespace Mastermind
 {
-    public class CodeBreaker
+    public class ComputerCodeBreaker
     {
         const int MAX_TRIES = 10;
-
         ICodeGuesser codeGuesser;
-        public CodeBreaker(ICodeGuesser codeGuesser)
+
+        public ComputerCodeBreaker(ICodeGuesser codeGuesser)
         {
             this.codeGuesser = codeGuesser;
         }
@@ -21,24 +18,27 @@ namespace Mastermind
             {
                 var guess = GetNextGuess(possibilities);
                 var score = PlayGuess(codeMaker, guess);
-                Console.WriteLine(guess);
-                Console.WriteLine(score);
 
-                if (score.NumberOfBlackPegs == 4)
+                if (GuessIsCorrect(score))
                 {
                     return guess;
                 }
-                else
-                {
-                    //Console.WriteLine(string.Join(",", possibilities.GetPossibilities()));
-                    //Console.WriteLine("----------------");
-                    //Console.WriteLine("Poss before = " + possibilities.Count());
-                    possibilities.EliminatePossibilities(guess, score);
-                    //Console.WriteLine("Poss after = " + possibilities.Count());
-                }
+
+                EliminatePossibilities(possibilities, guess, score);
             }
 
             return "NOT FOUND";
+        }
+
+        static void EliminatePossibilities(Possibilities possibilities, string guess, Score score)
+        {
+            possibilities.EliminatePossibilities(guess, score);
+        }
+
+        static bool GuessIsCorrect(Score score)
+        {
+            var variable = score.NumberOfBlackPegs == 4;
+            return variable;
         }
 
         string GetNextGuess(Possibilities possibilities)

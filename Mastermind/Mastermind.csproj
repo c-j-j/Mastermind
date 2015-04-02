@@ -38,7 +38,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeBreaker.cs" />
-    <Compile Include="MastermindGame.cs" />
     <Compile Include="CodeGuesser.cs" />
     <Compile Include="Guess.cs" />
     <Compile Include="Possibilities.cs" />
@@ -50,6 +49,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="ComputerCodeMaker.cs" />
     <Compile Include="ICodeGuesser.cs" />
+    <Compile Include="Main.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

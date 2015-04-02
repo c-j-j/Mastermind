@@ -7,12 +7,12 @@ namespace Mastermind.Test
     public class CodeBreakerTest
     {
 
-        CodeBreaker codeBreaker;
+        ComputerCodeBreaker codeBreaker;
 
         [SetUp]
         public void Setup()
         {
-            codeBreaker = new CodeBreaker(new CodeGuesser(new HitCountCalculator()));
+            codeBreaker = new ComputerCodeBreaker(new NegamaxCodeGuesser(new HitCountCalculator()));
         }
 
         [Test]

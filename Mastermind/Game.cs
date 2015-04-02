@@ -5,11 +5,10 @@ namespace Mastermind
 {
     public class Game
     {
-        CodeMaker codeMaker;
+        readonly CodeMaker codeMaker;
+        readonly ComputerCodeBreaker codeBreaker;
 
-        CodeBreaker codeBreaker;
-
-        public Game(CodeMaker codeMaker, CodeBreaker codeBreaker)
+        public Game(CodeMaker codeMaker, ComputerCodeBreaker codeBreaker)
         {
             this.codeBreaker = codeBreaker;
             this.codeMaker = codeMaker;
@@ -17,11 +16,24 @@ namespace Mastermind
 
         public bool Run()
         {
-            var possiblities = new Possibilities(Permutation.Generate(4, "1", "2", "3", "4", "5", "6").ToArray());
-            codeMaker.SetCode(possiblities);
             Console.WriteLine("SelectedCode = " + codeMaker.SelectedCode);
-            string guess = codeBreaker.GuessCode(possiblities, codeMaker);
-            return guess == codeMaker.SelectedCode;
+            return HasCodeBreakerGuessedCorrectly(GetGuessFromCodeBreaker());
+        }
+
+        bool HasCodeBreakerGuessedCorrectly(string finalGuess)
+        {
+            return finalGuess == codeMaker.SelectedCode;
+        }
+
+        string GetGuessFromCodeBreaker()
+        {
+            return codeBreaker.GuessCode(BuildAllPossibilities(), codeMaker);
+        }
+
+        static Possibilities BuildAllPossibilities()
+        {
+            var variable = new Possibilities(Permutation.Generate(4, "1", "2", "3", "4", "5", "6").ToArray());
+            return variable;
         }
     }
 }
