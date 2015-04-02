@@ -61,8 +61,17 @@ namespace Mastermind.Test
         [Test]
         public void SelectedCodeWithDuplicate()
         {
-            Score score = scoreCalculator.GetScore("ABDC", "XXAX");
-            Assert.AreEqual(1, score.NumberOfWhitePegs);
+            Score score = scoreCalculator.GetScore("BAAA", "AAAA");
+            Assert.AreEqual(3, score.NumberOfBlackPegs);
+            Assert.AreEqual(0, score.NumberOfWhitePegs);
+        }
+
+        [Test]
+        public void SelectedCodeWhereDuplicateExistsInBothGuessAndAnswer()
+        {
+            Score score = scoreCalculator.GetScore("AAAA", "BAAA");
+            Assert.AreEqual(3, score.NumberOfBlackPegs);
+            Assert.AreEqual(0, score.NumberOfWhitePegs);
         }
 
     }

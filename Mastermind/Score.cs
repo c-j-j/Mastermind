@@ -56,5 +56,10 @@ namespace Mastermind
                 return true;
             }
         }
+
+        public override string ToString()
+        {
+           return string.Format("W={0}, B={1}", NumberOfWhitePegs, NumberOfBlackPegs);
+        }
     }
 }

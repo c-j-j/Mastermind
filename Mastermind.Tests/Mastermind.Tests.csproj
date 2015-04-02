@@ -48,6 +48,9 @@
     <Compile Include="ScoreCalculatorTest.cs" />
     <Compile Include="CombinationTest.cs" />
     <Compile Include="CodeBreakerTest.cs" />
+    <Compile Include="StubCodeGuesser.cs" />
+    <Compile Include="StubCodeMaker.cs" />
+    <Compile Include="GameTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mastermind\Mastermind.csproj">

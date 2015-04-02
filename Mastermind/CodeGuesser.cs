@@ -4,19 +4,19 @@ using System.Linq;
 
 namespace Mastermind
 {
-    public class CodeGuesser
+    public class CodeGuesser : ICodeGuesser
     {
         HitCountCalculator hitCountCalculator;
-
-        public string GetNextGuess(Possibilities possibilities)
-        {
-            var negamaxCalculator = new Negamax.NegamaxCalculator<GuessWithPossiblities>(IsGuessPresent, GetHitCount, GetPossibilities);
-            return negamaxCalculator.Negamax(GuessWithPossiblities.NoGuess(possibilities)).Node.Guess;
-        }
 
         public CodeGuesser(HitCountCalculator HitCountCalculator)
         {
             this.hitCountCalculator = HitCountCalculator;
+
+        }
+        public string GetNextGuess(Possibilities possibilities)
+        {
+            var negamaxCalculator = new Negamax.NegamaxCalculator<GuessWithPossiblities>(IsGuessPresent, GetHitCount, GetPossibilities);
+            return negamaxCalculator.Negamax(GuessWithPossiblities.NoGuess(possibilities)).Node.Guess;
         }
 
         public bool IsGuessPresent(GuessWithPossiblities guess)

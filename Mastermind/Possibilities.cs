@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,6 +35,7 @@ namespace Mastermind
             foreach (var possibility in possibilities)
             {
                 var scoreForPossibility = new ScoreCalculator().GetScore(guess, possibility);
+                Console.WriteLine(string.Format("score = {0}, possibility = {1}", scoreForPossibility, possibility));
 
                 if (!score.EqualTo(scoreForPossibility))
                 {

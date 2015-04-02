@@ -5,8 +5,8 @@ namespace Mastermind
 {
     public interface CodeMaker
     {
-        void SelectCode(Possibilities possibilities);
-
+        void SetCode(Possibilities possibilities);
+        Score GetScore(string guess);
         string SelectedCode
         {
             get;

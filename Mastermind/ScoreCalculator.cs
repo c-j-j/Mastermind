@@ -1,53 +1,74 @@
+using System;
+using System.Linq;
 using System.Text;
 
 namespace Mastermind
 {
     public class ScoreCalculator
     {
-       public Score GetScore(string actualAnswer, string guess)
-       {
+        const char NULL = '\0';
+
+        public Score GetScore(string code, string guess)
+        {
             var score = new Score();
-            var code = new StringBuilder(actualAnswer);
+            var guessChars = guess.ToCharArray();
+            var codeChars = code.ToCharArray();
 
-            foreach (char guessedChar in guess)
+            PopulateScoreWithBlackPegs(guess, score, guessChars, codeChars);
+            PopulateScoreWithWhitePegs(guess, score, guessChars, codeChars);
+            return score;
+        }
+
+        static void PopulateScoreWithBlackPegs(string guess, Score score, char[] guessChars, char[] codeChars)
+        {
+            for (int i = 0; i < guess.Length; i++)
             {
-                var indexOfChar = FindIndexOfCharInCode(code, guessedChar);
-                if (GuessedCharacterExistsInCode(indexOfChar))
+                if (CorrectGuessInCorrectLocation(guessChars, codeChars, i))
                 {
-                    if(GuessHasCorrectLocation(guess, indexOfChar, guessedChar))
-                    {
-                        score.AddBlackPeg();
-
-                    }else
-                    {
-                        score.AddWhitePeg();
-                    }
-                    removeGuessedCharacter(code, indexOfChar);
+                    score.AddBlackPeg();
+                    RemoveCharFromArray(guessChars, i);
+                    RemoveCharFromArray(codeChars, i);
                 }
             }
-            return score;
-       }
-
-        void removeGuessedCharacter(StringBuilder code, int indexOfChar)
-        {
-            code[indexOfChar] = ' ';
         }
 
-        bool GuessedCharacterExistsInCode(int indexOfChar)
+        static void PopulateScoreWithWhitePegs(string guess, Score score, char[] guessChars, char[] codeChars)
         {
-            return indexOfChar != -1;
+            for (int i = 0; i < guess.Length; i++)
+            {
+                if (guessChars[i] != NULL)
+                {
+                    var indexOfChar = FindIndex(codeChars, guessChars[i]);
+                    if (CharacterFound(indexOfChar))
+                    {
+                        score.AddWhitePeg();
+                        RemoveCharFromArray(guessChars, i);
+                        RemoveCharFromArray(codeChars, indexOfChar);
+                    }
+                }
+            }
         }
 
-        private int FindIndexOfCharInCode(StringBuilder code, char characterToFind)
+        static int FindIndex(char[] chars, char characterToFind)
         {
-            return code.ToString().IndexOf(characterToFind);
+            return Array.IndexOf(chars, characterToFind);
         }
 
-        private bool GuessHasCorrectLocation(string guess, int indexOfGuessedChar, char guessedChar)
+        static bool CorrectGuessInCorrectLocation(char[] guessChars, char[] codeChars, int index)
         {
-            return  guess[indexOfGuessedChar].Equals(guessedChar);
+            return guessChars[index] == codeChars[index];
         }
 
+        static void RemoveCharFromArray(char[] guessChars, int indexToRemove)
+        {
+            guessChars[indexToRemove] = NULL;
+        }
+
+        static bool CharacterFound(int indexOfChar)
+        {
+            var variable = indexOfChar != -1;
+            return variable;
+        }
 
     }
 }
